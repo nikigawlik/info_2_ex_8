@@ -79,7 +79,7 @@ public class UserInterface
             addButton(buttonPanel, "-");
             addButton(buttonPanel, "=");
 
-    		buttonPanel.add(new JLabel(" "));
+            addButton(buttonPanel, ".");
     		buttonPanel.add(new JLabel(" "));
     		buttonPanel.add(new JLabel(" "));
     		buttonPanel.add(new JLabel(" "));
@@ -143,6 +143,9 @@ public class UserInterface
         }
         else if(command.equals("Day")) {
         	calc.getWeekDay();
+        }
+        else if(command.equals(".")) {
+        	calc.dot();
         }
         // else unknown command.
 

@@ -25,6 +25,9 @@ public class CalcEngine {
 
 	private String theDay;
 	private boolean day;
+	
+	private String dateString;
+	private boolean buildingDate;
 
 	/**
 	 * Create a CalcEngine.
@@ -38,8 +41,9 @@ public class CalcEngine {
 	 *         display.
 	 */
 	public String getDisplayValue() {
-		if (day) {
-			
+		if (dateString != "")
+			return dateString;
+		else if (day) {
 			return theDay;
 		} else {
 			return "" + displayValue;
@@ -67,6 +71,11 @@ public class CalcEngine {
 	 *            The number pressed on the calculator.
 	 */
 	public void numberPressed(int number) {
+		if (buildingDate)
+		{
+			dateString += number;
+		}
+		else
 		if (buildingDisplayValue) {
 			// Incorporate this digit.
 			displayValue = displayValue * 10 + number;
@@ -74,6 +83,25 @@ public class CalcEngine {
 			// Start building a new number.
 			displayValue = number;
 			buildingDisplayValue = true;
+		}
+	}
+
+	public void dot() {
+		if (!buildingDisplayValue)
+			keySequenceError();
+		
+		if (!buildingDate)
+		{
+			dateString += displayValue;
+			dateString += ".";
+			displayValue = 0;
+			buildingDate = true;
+		}
+		else
+		{
+			
+
+			dateString += ".";
 		}
 	}
 
@@ -99,11 +127,22 @@ public class CalcEngine {
 		// so ensure that we really have a left operand, an operator
 		// and a right operand.
 		if (haveLeftOperand && lastOperator != '?' && buildingDisplayValue) {
+			parseDateIfNeccessary();
 			calculateResult();
 			lastOperator = '?';
 			buildingDisplayValue = false;
 		} else {
 			keySequenceError();
+		}
+	}
+
+	private void parseDateIfNeccessary() {
+		if (buildingDate)
+		{
+			String[] date = dateString.split("\\.");
+			displayValue = (int)(new JulianDate(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]))).getDays();
+			dateString = "";
+			buildingDate = false;
 		}
 	}
 
@@ -116,6 +155,8 @@ public class CalcEngine {
 		buildingDisplayValue = false;
 		displayValue = 0;
 		theDay = "";
+		dateString = "";
+		buildingDate = false;
 	}
 
 	/**
@@ -175,6 +216,8 @@ public class CalcEngine {
 			keySequenceError();
 			return;
 		}
+		
+		parseDateIfNeccessary();
 
 		if (lastOperator != '?') {
 			// First apply the previous operator.
