@@ -1,3 +1,5 @@
+package info_2_ex_8;
+
 public class JulianDate implements JulianDateInterface {
 	protected long days;
 	int gregDay;

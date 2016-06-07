@@ -1,3 +1,5 @@
+package info_2_ex_8;
+
 /**
  * The main class of a simple calculator. Create one of these and you'll
  * get the calculator on screen.
@@ -26,4 +28,9 @@ public class Calculator
     {
         gui.setVisible(true);
     }
+    
+    public static void main(String[] args) {
+		new Calculator();
+	}
+    
 }

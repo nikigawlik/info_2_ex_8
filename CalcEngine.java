@@ -1,3 +1,5 @@
+package info_2_ex_8;
+
 /**
  * The main part of the calculator doing the calculations.
  * 
@@ -37,6 +39,11 @@ public class CalcEngine
     public int getDisplayValue()
     {
         return displayValue;
+    }
+    
+    public String getWeekDay(){
+    	return new JulianDate(displayValue).getWeekday();
+    	
     }
 
     /**

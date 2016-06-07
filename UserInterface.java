@@ -1,3 +1,5 @@
+package info_2_ex_8;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -70,7 +72,7 @@ public class UserInterface
             addButton(buttonPanel, "1");
             addButton(buttonPanel, "2");
             addButton(buttonPanel, "3");
-            buttonPanel.add(new JLabel(" "));
+            addButton(buttonPanel, "Day");
             
             addButton(buttonPanel, "0");
             addButton(buttonPanel, "+");
@@ -133,6 +135,9 @@ public class UserInterface
         }
         else if(command.equals("?")) {
             showInfo();
+        }
+        else if(command.equals("Day")) {
+        	calc.getWeekDay();
         }
         // else unknown command.
 
