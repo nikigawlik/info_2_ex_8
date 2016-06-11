@@ -82,7 +82,7 @@ public class UserInterface
             addButton(buttonPanel, ".");
             addButton(buttonPanel, "G > J");
             addButton(buttonPanel, "J > G");
-            addButton(buttonPanel, "Sub G");
+    		buttonPanel.add(new JLabel(" "));
             
         contentPane.add(buttonPanel, BorderLayout.CENTER);
 
