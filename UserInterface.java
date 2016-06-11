@@ -80,9 +80,9 @@ public class UserInterface
             addButton(buttonPanel, "=");
 
             addButton(buttonPanel, ".");
-    		buttonPanel.add(new JLabel(" "));
-    		buttonPanel.add(new JLabel(" "));
-    		buttonPanel.add(new JLabel(" "));
+            addButton(buttonPanel, "G > J");
+            addButton(buttonPanel, "J > G");
+            addButton(buttonPanel, "Sub G");
             
         contentPane.add(buttonPanel, BorderLayout.CENTER);
 
@@ -147,6 +147,19 @@ public class UserInterface
         else if(command.equals(".")) {
         	calc.dot();
         }
+        
+        else if(command.equals("G > J")) {
+        	calc.parseDateIfNeccessary();
+        }
+        
+        else if(command.equals("J > G")) {
+        	calc.julianToGregorian();
+        }
+        
+        else if(command.equals("Sub G")) {
+        	calc.julianToGregorian();
+        }
+        
         // else unknown command.
 
         redisplay();
