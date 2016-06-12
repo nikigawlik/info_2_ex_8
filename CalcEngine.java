@@ -57,7 +57,7 @@ public class CalcEngine {
 	public void getWeekDay() {
 		if (!dayOnDisplay) {
 			if (dateString != "") {
-				parseDateIfNeccessary();
+				parseDateIfNecessary();
 				backToGreg = true;
 			}
 			theDay = new JulianDate(displayValue).getWeekday();
@@ -136,9 +136,16 @@ public class CalcEngine {
 	}
 
 	// converts gregorian date to julian date
-	public void parseDateIfNeccessary() {
+	public void parseDateIfNecessary() {
 		if (buildingDate) {
 			String[] date = dateString.split("\\.");
+			
+			if(date.length != 3)
+			{
+				dateError();
+				return;
+			}
+			
 			displayValue = (int) (new JulianDate(Integer.parseInt(date[0]), Integer.parseInt(date[1]),
 					Integer.parseInt(date[2]))).getDays();
 			dateString = "";
@@ -222,7 +229,7 @@ public class CalcEngine {
 	private void calculateDaysBetween(){
 		
 		JulianDate fistDate = new JulianDate(leftOperand);
-		parseDateIfNeccessary();
+		parseDateIfNecessary();
 		JulianDate secondDate = new JulianDate(displayValue);
 		displayValue = Math.abs((int)fistDate.daysSince(secondDate));
 		
@@ -255,7 +262,7 @@ public class CalcEngine {
 			// new operator.
 			haveLeftOperand = true;
 			if(dateString !=""){
-				parseDateIfNeccessary();
+				parseDateIfNecessary();
 				backToGreg = true;
 			}
 			leftOperand = displayValue;
@@ -270,6 +277,14 @@ public class CalcEngine {
 	 */
 	private void keySequenceError() {
 		System.out.println("A key sequence error has occurred.");
+		// Reset everything.
+		clear();
+	}
+	/**
+	 * Report an error with the date format.
+	 */
+	private void dateError() {
+		System.out.println("The entered date was not valid.");
 		// Reset everything.
 		clear();
 	}

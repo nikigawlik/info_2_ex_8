@@ -149,7 +149,7 @@ public class UserInterface
         }
         
         else if(command.equals("G > J")) {
-        	calc.parseDateIfNeccessary();
+        	calc.parseDateIfNecessary();
         }
         
         else if(command.equals("J > G")) {
